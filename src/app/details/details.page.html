@@ -1,9 +1,111 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>details</ion-title>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button fill="solid" shape="round" color="light" routerLink="/home">
+        <ion-icon name="arrow-back" slot="icon-only" color="primary"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{data?.name}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="solid" shape="round" color="light" routerLink="/home">
+        <ion-icon name="share-outline" slot="icon-only" color="primary"></ion-icon>
+      </ion-button>
+      <ion-button fill="solid" shape="round" color="light" routerLink="/home">
+        <ion-icon name="search-outline" slot="icon-only" color="primary"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true" scrollEvents="true" [appParallax]="img" (ionScroll)="onScroll($event)">
+  <div #img class="header-image" [style.background-image]="'url(' + data?.img + ')'"></div>
+<ion-header collapse="condense" class="ion-no-border">
+  <ion-toolbar>
+    <ion-title size="large">{{data?.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
 
+<div *ngIf="data">
+  <ion-row >
+    <ion-col size="12" class="light-bg ion-padding-start">
+      <ion-icon name="star" color="primary"></ion-icon>
+      <ion-text color="primary">
+        {{data.rating}}
+      </ion-text>
+      <ion-text color="medium">{{data.ratings}}
+        <span *ngFor="let tag of data.tags | slice:0:2"> - {{tag}} </span>
+      </ion-text>
+    </ion-col>
+    <ion-col size="12" class="light-bg ion-padding-start">
+      <ion-icon name="location-outline" color="medium"></ion-icon>
+      <ion-text>
+        {{data.distance}}
+      </ion-text>
+    </ion-col>
+    <ion-col size="12" class="light-bg ion-padding">
+      <ion-badge color="danger">
+        <ion-icon name="pricetag-outline"></ion-icon>
+        Meal Deals
+      </ion-badge>
+      </ion-col>
+      <ion-col size="12" class="ion-no-padding">
+        <ion-item lines="full">
+        <ion-label class="ion-text-wrap">
+          {{data.about}}
+        </ion-label>
+      </ion-item>
+    </ion-col>
+    <ion-col size="12" class="light-bg">
+        <ion-row class="ion-align-items-center">
+          <ion-col size="1">
+            <ion-icon name="location-outline" color="medium"></ion-icon>
+          </ion-col>
+          <ion-col size="10">
+            <ion-label>Restaurant Info
+              <p>Map, allergens and hygiene rating</p>
+            </ion-label>
+          </ion-col>
+          <ion-col size="1">
+            <ion-icon name="chevron-forward" color="primary"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      
+        </ion-row>
+
+      </div>
+      <div class="ion-padding" *ngIf="data">
+        Please do not call Vapiano for problems in your order, as these cannot be handle by them.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente nesciunt voluptas magnam, ipsum a atque.
+      </div>
+      
+      <!-- <div slot="fixed"> -->
+        <div class="sticky-cats">
+      <ion-slides *ngIf="data" [options]="opts">
+        <ion-slide [ngClass]="{'slides-visible': categorySlidesVisible, 'slides-hidden': !categorySlidesVisible}"
+         *ngFor="let entry of data.food; let i = index;">
+          <ion-button [class.active-category]="activeCategory === i" fill="clear" (click)="selectCategory(i)">
+            {{entry.category}}
+          </ion-button>
+        </ion-slide>
+      </ion-slides>
+    </div>
+
+      <ion-list *ngFor="let entry of data?.food">
+        <ion-list-header>
+          <ion-label>{{entry.category}}</ion-label>
+        </ion-list-header>
+        <ion-row *ngFor="let meal of entry.meals" class="ion-padding meal-row">
+          <ion-col size="8" class="border-bottom">
+            <ion-label>
+              {{meal.name}}
+              <p>{{meal.info}}</p>
+            </ion-label>
+            <ion-text color="dark"><b>{{meal.price | currency: 'EUR' }}</b></ion-text>
+          </ion-col>
+          <ion-col size="4" class="border-bottom">
+            <div class="meal-image" [style.background-image]="'url(' + meal.img + ')'"></div>
+          </ion-col>
+        </ion-row>
+      </ion-list>
 </ion-content>

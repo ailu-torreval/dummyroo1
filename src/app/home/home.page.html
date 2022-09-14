@@ -1,20 +1,145 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content scrollEvents="true" [appHideHeader]="hideheader" (ionScroll)="onScroll($event)">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" >
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-row class="info-row" #hideheader>
+    <ion-col size="2" class="ion-padding-start">
+      <img src="../../assets/scooter.png" alt="scooter">
+    </ion-col>
+    <ion-col size="8">
+      <ion-text color="dark">
+        <span>Now</span><br>
+        <b>London</b>
+        <ion-icon name="chevron-down-outline" color="primary"></ion-icon>
+      </ion-text>
+    </ion-col>
+    <ion-col size="2">
+      <ion-button fill="clear">
+        <ion-icon name="person-outline" slot="icon-only"></ion-icon>      </ion-button>
+    </ion-col>
+  </ion-row>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-row class="sticky-row">
+    <ion-col size="10">
+      <ion-text class="ion-padding-start" color="medium" [ngClass]="{'location-visible': showLocationDetail, 'location-hidden' : !showLocationDetail}">London</ion-text>
+      <ion-searchbar placeholder="Dishes, cuisine or restaurants"></ion-searchbar>
+    </ion-col>
+    <ion-col size="2" class="options">
+      <ion-button fill="clear">
+        <ion-icon name="options-outline" slot="icon-only"></ion-icon>      </ion-button>
+    </ion-col>
+  </ion-row>
+
+<ion-slides [options]="catSlidesOpts">
+  <ion-slide *ngFor="let cat of categories">
+    <img [src]="cat.img" alt="category img">
+  </ion-slide>
+</ion-slides>
+<ion-slides [options]="highlightSlidesOpts">
+  <ion-slide *ngFor="let h of highlights">
+    <img [src]="h.img" alt="highlightsimg">
+  </ion-slide>
+</ion-slides>  
+
+<ion-text color="dark"> <strong> Featured </strong> </ion-text>
+<ion-slides [options]="featuredSlidesOpts">
+  <ion-slide *ngFor="let f of featured" class="featured-slide" routerLink="/details">
+    <img [src]="f.img" alt="featred img">
+    <div class="info">
+      <ion-text color="dark"><b>{{f.name}}</b></ion-text>
+      <span>
+      <ion-icon name="star" color ="secondary"></ion-icon>
+      <ion-text color="secondary">{{f.rating}}</ion-text> {{f.ratings}}
+    </span>
+    <span>
+      <ion-icon name="location-outline"></ion-icon> {{f.distance}}
+    </span>
+    </div>
+  </ion-slide>
+</ion-slides>
+
+<ion-slides [options]="catSlidesOpts">
+  <ion-slide *ngFor="let cat of categories">
+    <img [src]="cat.img" alt="category img">
+  </ion-slide>
+</ion-slides>
+<ion-slides [options]="highlightSlidesOpts">
+  <ion-slide *ngFor="let h of highlights">
+    <img [src]="h.img" alt="highlightsimg">
+  </ion-slide>
+</ion-slides>  
+
+<ion-text color=""dark> <strong> Featured </strong> </ion-text>
+<ion-slides [options]="featuredSlidesOpts">
+  <ion-slide *ngFor="let f of featured" class="featured-slide" routerLink="/details">
+    <img [src]="f.img" alt="featred img">
+    <div class="info">
+      <ion-text color="dark"><b>{{f.name}}</b></ion-text>
+      <span>
+      <ion-icon name="star" color ="secondary"></ion-icon>
+      <ion-text color="secondary">{{f.rating}}</ion-text> {{f.ratings}}
+    </span>
+    <span>
+      <ion-icon name="location-outline"></ion-icon> {{f.distance}}
+    </span>
+    </div>
+  </ion-slide>
+</ion-slides>
+
+<ion-slides [options]="catSlidesOpts">
+  <ion-slide *ngFor="let cat of categories">
+    <img [src]="cat.img" alt="category img">
+  </ion-slide>
+</ion-slides>
+<ion-slides [options]="highlightSlidesOpts">
+  <ion-slide *ngFor="let h of highlights">
+    <img [src]="h.img" alt="highlightsimg">
+  </ion-slide>
+</ion-slides>  
+
+<ion-text color="dark"> <strong> Featured </strong> </ion-text>
+<ion-slides [options]="featuredSlidesOpts">
+  <ion-slide *ngFor="let f of featured" class="featured-slide" routerLink="/details">
+    <img [src]="f.img" alt="featred img">
+    <div class="info">
+      <ion-text color="dark"><b>{{f.name}}</b></ion-text>
+      <span>
+      <ion-icon name="star" color ="secondary"></ion-icon>
+      <ion-text color="secondary">{{f.rating}}</ion-text> {{f.ratings}}
+    </span>
+    <span>
+      <ion-icon name="location-outline"></ion-icon> {{f.distance}}
+    </span>
+    </div>
+  </ion-slide>
+</ion-slides>
+
+<ion-slides [options]="catSlidesOpts">
+  <ion-slide *ngFor="let cat of categories">
+    <img [src]="cat.img" alt="category img">
+  </ion-slide>
+</ion-slides>
+<ion-slides [options]="highlightSlidesOpts">
+  <ion-slide *ngFor="let h of highlights">
+    <img [src]="h.img" alt="highlightsimg">
+  </ion-slide>
+</ion-slides>  
+
+<ion-text color="dark"> <strong> Featured </strong> </ion-text>
+<ion-slides [options]="featuredSlidesOpts">
+  <ion-slide *ngFor="let f of featured" class="featured-slide" routerLink="/details">
+    <img [src]="f.img" alt="featred img">
+    <div class="info">
+      <ion-text color="dark"><b>{{f.name}}</b></ion-text>
+      <span>
+      <ion-icon name="star" color ="secondary"></ion-icon>
+      <ion-text color="secondary">{{f.rating}}</ion-text> {{f.ratings}}
+    </span>
+    <span>
+      <ion-icon name="location-outline"></ion-icon> {{f.distance}}
+    </span>
+    </div>
+  </ion-slide>
+</ion-slides>
 </ion-content>
